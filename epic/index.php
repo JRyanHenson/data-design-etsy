@@ -25,9 +25,6 @@
 			<li>The seller inputs a product name, description, available quantity, and uploads pictures. This information is populated in the Product table.</li>
 			<li>The product is assigned a product number. Primary Key is created in the DB for Product table.</li>
 			<li>Buyer lists product description, pictures, and reviews of available products.</li>
-			<li>Buyer adds products to cart. Cart table is populated with cartId as primary key. One buyerId is added to Cart table. One or many cartProductIds are added to Cart table</li>
-			<li>Buyer checks-out once all needed items are in cart.</li>
-			<li>Buyer leaves new reviews for products. productReview populated in Product table. One productId can have many productReviews.</li>
 		</ol>
 
 		<h2>Conceptual Model</h2>
@@ -49,26 +46,14 @@
 				<li>productDescription</li>
 				<li>productPrice</li>
 				<li>productPicture</li>
-				<li>productReviews</li>
-			</ul>
-			<li>Cart</li>
-			<ul>
-				<li>cartId (Primary Key)</li>
-				<li>cartContents</li>
-				<li>cartBuyerId (Foreign Key)</li>
-				<li>cartProductId (Foreign Key)</li>
 			</ul>
 		</ol>
 		<ol><p>Relationships</p>
 			<li>One user has many products</li>
-			<li>Many users can have many reviews</li>
 			<li>One product has one description</li>
 			<li>One product has one price</li>
 			<li>One product has many pictures</li>
-			<li>One product has many reviews</li>
-			<li>One cart has many products</li>
-			<li>Many products have many carts</li>
-			<li>Many products can have many reviews</li>
+			<li>One user buys many products</li>
 		</ol>
 	</body>
 </html>
