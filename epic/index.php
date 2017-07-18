@@ -57,5 +57,7 @@
 		</ol>
 		<h2>Entity Relationship Diagram (ERD)</h2>
 		<img src="Images/ERD_Diagram.jpg"alt="ERD Diagram">
+		<h2>Data Description Language (DDL) Script (ERD)</h2>
+		<img src="Images/DDL_Script.png"alt="DDL Script">
 	</body>
 </html>
