@@ -22,7 +22,7 @@
 		<h2>Interaction Flow</h2>
 		<ol>
 			<li>After the seller has logged into their already established account (Profile table already populated with profileId as primary key), the seller begins to create an item for sale.</li>
-			<li>The seller inputs a product name, description, and uploads pictures. This information is populated in the Product table.</li>
+			<li>The seller inputs a product name and description. This information is populated in the Product table.</li>
 			<li>The product is assigned a product number. Primary Key is created in the Product table.</li>
 			<li>Buyer lists product description, pictures, and price of available products.</li>
 		</ol>
@@ -45,19 +45,17 @@
 				<li>productUserId (Foreign Key)</li>
 				<li>productDescription</li>
 				<li>productPrice</li>
-				<li>productPicture</li>
 			</ul>
 		</ol>
 		<ol><p>Relationships</p>
 			<li>One profile has many products</li>
 			<li>One product has one description</li>
 			<li>One product has one price</li>
-			<li>One product has many pictures</li>
 			<li>One user lists many products</li>
 		</ol>
-		<h2>Entity Relationship Diagram (ERD)</h2>
-		<img src="Images/ERD_Diagram.jpg"alt="ERD Diagram">
+		<h2>Entity Relationship Diagram</h2>
+		<img src="Images/erd_diagram.jpg"alt="ERD Diagram">
 		<h2>Data Description Language (DDL) Script (ERD)</h2>
-		<img src="Images/DDL_Script.png"alt="DDL Script">
+		<img src="Images/ddl_script.png"alt="DDL Script">
 	</body>
 </html>
