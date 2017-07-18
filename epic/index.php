@@ -22,9 +22,9 @@
 		<h2>Interaction Flow</h2>
 		<ol>
 			<li>After the seller has logged into their already established account (Profile table already populated with profileId as primary key), the seller begins to create an item for sale.</li>
-			<li>The seller inputs a product name, description, available quantity, and uploads pictures. This information is populated in the Product table.</li>
-			<li>The product is assigned a product number. Primary Key is created in the DB for Product table.</li>
-			<li>Buyer lists product description, pictures, and reviews of available products.</li>
+			<li>The seller inputs a product name, description, and uploads pictures. This information is populated in the Product table.</li>
+			<li>The product is assigned a product number. Primary Key is created in the Product table.</li>
+			<li>Buyer lists product description, pictures, and price of available products.</li>
 		</ol>
 
 		<h2>Conceptual Model</h2>
@@ -49,11 +49,13 @@
 			</ul>
 		</ol>
 		<ol><p>Relationships</p>
-			<li>One user has many products</li>
+			<li>One profile has many products</li>
 			<li>One product has one description</li>
 			<li>One product has one price</li>
 			<li>One product has many pictures</li>
-			<li>One user buys many products</li>
+			<li>One user lists many products</li>
 		</ol>
+		<h2>Entity Relationship Diagram (ERD)</h2>
+		<img src="Images/ERD_Diagram.jpg"alt="ERD Diagram">
 	</body>
 </html>
