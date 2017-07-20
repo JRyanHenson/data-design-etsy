@@ -53,9 +53,9 @@
 			<li>One product has one price</li>
 			<li>One user lists many products</li>
 		</ol>
-		<h2>Entity Relationship Diagram</h2>
+		<h2>Entity Relationship Diagram (ERD)</h2>
 		<img src="Images/erd_diagram.jpg"alt="ERD Diagram">
-		<h2>Data Description Language (DDL) Script (ERD)</h2>
+		<h2>Data Description Language (DDL) Script</h2>
 		<img src="Images/ddl_script.png"alt="DDL Script">
 	</body>
 </html>

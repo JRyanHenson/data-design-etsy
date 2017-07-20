@@ -33,4 +33,4 @@ CREATE TABLE product (
 	-- and finally create the primary key
 	PRIMARY KEY(productId)
 );
-
+SET FOREIGN_KEY_CHECKS=1;
