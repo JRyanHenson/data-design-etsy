@@ -1,55 +1,49 @@
 -- Insert: create a row
-	INSERT INTO tweet(tweetProfileId, tweetContent, tweetDateTime)
-	VALUES(39, @comcast is too expensive”, NOW();
+	INSERT INTO profile(profileActivationToken, profileAtHandle, profileEmail, profileHash, profilePhone, profileSalt)
+	VALUES(0, "@ryebread", "hensojr@gmail.com", 0, "555-5555", 0);
+
+	INSERT INTO profile(profileActivationToken, profileAtHandle, profileEmail, profileHash, profilePhone, profileSalt)
+	VALUES(0, "@mikey", "smike@gmail.com", 0, "555-5556", 0);
+
+	INSERT INTO profile(profileActivationToken, profileAtHandle, profileEmail, profileHash, profilePhone, profileSalt)
+	VALUES(0, "@jimbo", "jimbo@gmail.com", 0, "555-5557", 0);
+
+	INSERT INTO product(productUserId, productDescription, productPrice)
+	VALUES(1,"bike", 100.00);
+
+	INSERT INTO product(productUserId, productDescription, productPrice)
+	VALUES(2,"painting", 200.00);
+
+	INSERT INTO product(productUserId, productDescription, productPrice)
+	VALUES(3,"board game", 40.00);
 
 -- Update: change a row
-	UPDATE entity SET attribute0 = value0, attribute1 = value1, ..., attributek = valuek
-	WHERE ???
+	UPDATE profile SET profileAtHandle = "@marbleryebread" WHERE profileIde = 1;
 
 -- Where Clause
 -- numerics
-	WHERE tweetId = 42 —select by equality
-	WHERE tweetId > 42 — select by inequality; <, > !=, <=, >=
+	SELECT profileAtHandle FROM profile WHERE profileId = 1;-- select by equality
+	SELECT profileAtHandle FROM profile WHERE profileId < 3; -- select by inequality; <, > !=, <=, >=
 
 -- strings
-	WHERE tweetContent = “exact content” — select by string equality
-	WHERE tweetContent = “%contains%” — select by starting with
-	WHERE tweetContent LIKE "starts%" -- select by starting with
-	WHERE tweetContent LIKE "ends%" -- select by ending with
+	SELECT productPrice FROM product WHERE productDescription = “bike”; -- select by string equality
+	SELECT productPrice From product WHERE productDescription = “%game%”; --select by starting with
+	SELECT productPrice From product WHERE productDescription LIKE "p%" -- select by starting with
+	SELECT productPrice From product WHERE productDescription LIKE "%e" -- select by ending with
 
 -- expressions
 	WHERE SUM(price * quantity) > 100
-	WHERE LENGTH(tweetContent) > 90hel
+	SELECT productPrice FROM product WHERE SUM(productPrice + 0) < 100 GROUP BY;
 
 -- AND/OR
-	WHERE tweetProfileId = 39 AND LENGTH(tweetContent) > 90
-	WHERE tweetProfileId = 39 OR tweetContent LIKE "#comcastdoesntcare"
+	SELECT profileAtHandle FROM profile WHERE profileId = 1 AND LENGTH(profilePhone) > 2;
+	SELECT profileATHandle FROM profile WHERE profileId = 1 OR profilePhone LIKE "555-5555";
 
 -- Update
-	UPDATE entity SET attribute0 = value0, attribute1 = value1, ..., attributek = valuek
-	WHERE ???
-
-	UPDATE tweet SET tweetProfileId = 39, tweetContent = "my tweets are just getting better #sassy", tweetDateTime = NOW()
-	WHERE tweetId = 42;
+	UPDATE profile SET profileAtHandle = "@marbleryebread" WHERE profileIde = 1;
 
 -- Delete: get rid of a row
-	DELETE FROM entity
-	WHERE ???
-	DELETE FROM tweet WHERE tweetId = 42
+	DELETE profileEmail FROM profile WHERE profileId = 1;
 
 -- Select: get row(s)
-	SELECT attribute0, attribute1, …, attributes
-	FROM entity
-	WHERE ???
-
-	SELECT tweeId, tweetProfileId, tweetContent, tweetDateTime
-	FROM tweet
-	WHERE tweetProfileId = 42; —select by primary key
-
-	SELECT tweetId, tweetProfileId, tweetContent, tweetDateTime
-	FROM tweet
-	WHERE tweetProfileId = 39; — select by foreign key
-
-	SELECT tweetId, tweetProfileId, tweetContent, tweetDateTime
-	FROM tweet
-	WHERE tweetContent LIKE “%comcastdoesntcare%”; — select by string
+	SELECT profileId, profileEmail FROM profile WHERE profileAtHandle = "@marbleryebread";
