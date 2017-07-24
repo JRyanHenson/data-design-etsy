@@ -28,8 +28,8 @@
 -- strings
 	SELECT productPrice FROM product WHERE productDescription = “bike”; -- select by string equality
 	SELECT productPrice From product WHERE productDescription = “%game%”; --select by starting with
-	SELECT productPrice From product WHERE productDescription LIKE "p%" -- select by starting with
-	SELECT productPrice From product WHERE productDescription LIKE "%e" -- select by ending with
+	SELECT productPrice From product WHERE productDescription LIKE "p%"; -- select by starting with
+	SELECT productPrice From product WHERE productDescription LIKE "%e"; -- select by ending with
 
 -- expressions
 	WHERE SUM(price * quantity) > 100
