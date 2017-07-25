@@ -122,7 +122,7 @@ class product {
 		if(empty($newProductDescription) === true) {
 			throw(new \InvalidArgumentException("product description is empty or insecure"));
 		}
-		// verify the tweet content will fit in the database
+		// verify the productDescription will fit in the database
 		if(strlen($newProductDescription) > 140) {
 			throw(new \RangeException("product description content too large"));
 		}
