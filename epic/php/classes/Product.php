@@ -1,6 +1,6 @@
 <?php
 /**
- * Etsy data design project
+ * Etsy data design project product class
  * @author Ryan Henson <hensojr@gmail.com>
  * @version 1.0.0
  **/
@@ -93,11 +93,11 @@ class product {
 	 * @throws \TypeError if $newProductUserId is not an integer
 	 **/
 	public function setProductUserId(int $newProductUserId): void {
-		// verify the profileId is positive
+		// verify the productId is positive
 		if($newProductUserId <= 0) {
 			throw(new \RangeException("product user id is not positive"));
 		}
-		// convert and store the productProfileId
+		// convert and store the productProductId
 		$this->productUserId = $newProductUserId;
 	}
 	/**
@@ -152,5 +152,67 @@ class product {
 		// convert and store the productProfileId
 		$this->productPrice = $newProductPrice;
 	}
+	/**
+	 * inserts this product into mySQL
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError if $pdo is not a PDO connection object
+	 **/
+	public function insert(\PDO $pdo) : void {
+		// enforce the productId is null (i.e., don't insert a product that already exists)
+		if($this->productId !== null) {
+			throw(new \PDOException("not a new product"));
+		}
+		// create query template
+		$query = "INSERT INTO product(productUserId, productDescription, productPrice) VALUES(:productUserId, :productDescription, :productPrice)";
+		$statement = $pdo->prepare($query);
 
+		// bind the member variables to the place holders in the template
+		$parameters = ["productUserId" => $this->productUserId, "productDescription" => $this->productDescription, "productPrice" => $this->productPrice];
+		$statement->execute($parameters);
+
+		// update the null productId with what mySQL just gave us
+		$this->productId = intval($pdo->lastInsertId());
+	}
+	/**
+	 * deletes this product from mySQL
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError if $pdo is not a PDO connection object
+	 **/
+	public function delete(\PDO $pdo) : void {
+		// enforce the productId is not null (i.e., don't delete a product that hasn't been inserted)
+		if($this->productId === null) {
+			throw(new \PDOException("unable to delete a product that does not exist"));
+		}
+		// create query template
+		$query = "DELETE FROM product WHERE productId = :productId";
+		$statement = $pdo->prepare($query);
+
+		// bind the member variables to the place holder in the template
+		$parameters = ["productId" => $this->productId];
+		$statement->execute($parameters);
+	}
+	/**
+	 * updates this product in mySQL
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError if $pdo is not a PDO connection object
+	 **/
+	public function update(\PDO $pdo) : void {
+		// enforce the productId is not null (i.e., don't update a product that hasn't been inserted)
+		if($this->productId === null) {
+			throw(new \PDOException("unable to update a product that does not exist"));
+		}
+		// create query template
+		$query = "UPDATE product SET productUserId = :productUserId, productDescription = :productDescription, productPrice = :productPrice";
+		$statement = $pdo->prepare($query);
+
+		// bind the member variables to the place holders in the template
+		$parameters = ["productUserId" => $this->productUserId, "productDescription" => $this->productDescription, "productPrice" => $this->productPrice];
+		$statement->execute($parameters);
+	}
 }
