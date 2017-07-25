@@ -40,6 +40,7 @@ class profile {
 	 * @var string $profileSalt
 	 **/
 	private $profileSalt;
+
 	/**
 	 * constructor for this profile
 	 *
@@ -78,6 +79,7 @@ class profile {
 	public function getProfileId(): int {
 		return ($this->profileId);
 	}
+
 	/**
 	 * mutator method for profileId
 	 *
@@ -98,6 +100,7 @@ class profile {
 		// convert and store the profileId
 		$this->profileId = $newProfileId;
 	}
+
 	/**
 	 * accessor method for profileActivationToken
 	 *
@@ -107,16 +110,16 @@ class profile {
 		return ($this->profileActivationToken);
 	}
 	/**
-	* mutator method for profileActivationToken
-	*
-	* @param string $newProfileActivationToken new value of productDescription
-	* @throws \InvalidArgumentException if $newProfileActivationToken is not a string or insecure
-	* @throws \TypeError if $newProfileActivationToken is not a string
-	**/
+	 * mutator method for profileActivationToken
+	 *
+	 * @param string $newProfileActivationToken new value of productDescription
+	 * @throws \InvalidArgumentException if $newProfileActivationToken is not a string or insecure
+	 * @throws \TypeError if $newProfileActivationToken is not a string
+	 **/
 	public function setProfileActivationToken(string $newProfileActivationToken): void {
 		// verify the profileActivationToken is secure
-		$newProductDescription = trim($newProfileActivationToken);
-		$newProductDescription = filter_var($newProfileActivationToken, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+		$newProfileActivationToken = trim($newProfileActivationToken);
+		$newProfileActivationToken = filter_var($newProfileActivationToken, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 		if(empty($newProfileActivationToken) === true) {
 			throw(new \InvalidArgumentException("profile activation token is empty or insecure"));
 		}
@@ -125,82 +128,151 @@ class profile {
 			throw(new \RangeException("profile activation token description content too large"));
 		}
 		// store the profileActivationToken
-		$this->profileActivationToken= $newProfileActivationToken;
+		$this->profileActivationToken = $newProfileActivationToken;
 	}
 	/**
-	 * accessor method for productPrice
+	 * accessor method for profileAtHandle
 	 *
-	 * @return float value of productPrice
+	 * @return string value of profifeAtHandle
 	 **/
-	public function getProductPrice(): float {
-		return ($this->productPrice);
+	public function getProfileAtHandle(): string {
+		return ($this->profileAtHandle);
 	}
 	/**
-	 * mutator method for productUserId
+	 * mutator method for profileAtHandle
 	 *
-	 * @param int $newProductUserId new value of productUserId
-	 * @throws \RangeException if $newProductUserId is not positive
-	 * @throws \TypeError if $newProductUserId is not an integer
+	 * @param string $newProfileAtHandle new value of profileAtHandle
+	 * @throws \InvalidArgumentException if $newProfileAtHandle is not a string or insecure
+	 * @throws \TypeError if $newProfileAtHandle is not a string
 	 **/
-	public function setProductUserId(int $newProductUserId): void {
-		// verify the profileId is positive
-		if($newProductUserId <= 0) {
-			throw(new \RangeException("product user id is not positive"));
+	public function setProfileAtHandle(string $newProfileAtHandle): void {
+		// verify the profileAtHandle is secure
+		$newProfileAtHandle = trim($newProfileAtHandle);
+		$newProfileAtHandle = filter_var($newProfileAtHandle, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+		if(empty($newProfileAtHandle) === true) {
+			throw(new \InvalidArgumentException("profile at handle is empty or insecure"));
 		}
-		// convert and store the productProfileId
-		$this->productUserId = $newProductUserId;
-	}
-	/**
-	 * accessor method for productDescription
-	 *
-	 * @return string value of productDescription
-	 **/
-	public function getProductDescription(): string {
-		return ($this->productDescription);
-	}
-	/**
-	 * mutator method for productDescription
-	 *
-	 * @param string $newProductDescription new value of productDescription
-	 * @throws \InvalidArgumentException if $newProductDescription is not a string or insecure
-	 * @throws \TypeError if $newProductDescription is not a string
-	 **/
-	public function setProductDescription(string $newProductDescription): void {
-		// verify the productDescription is secure
-		$newProductDescription = trim($newProductDescription);
-		$newProductDescription = filter_var($newProductDescription, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-		if(empty($newProductDescription) === true) {
-			throw(new \InvalidArgumentException("product description is empty or insecure"));
+		// verify the profileActivationToken will fit in the database
+		if(strlen($newProfileAtHandle) > 32) {
+			throw(new \RangeException("profile at table description content too large"));
 		}
-		// verify the tweet content will fit in the database
-		if(strlen($newProductDescription) > 140) {
-			throw(new \RangeException("product description content too large"));
-		}
-		// store the productDescription
-		$this->productDescription = $newProductDescription;
+		// store the profileAtHandle
+		$this->profileActivationToken = $newProfileAtHandle;
 	}
 	/**
-	 * accessor method for productPrice
+	 * accessor method for profileEmail
 	 *
-	 * @return float value of productPrice
+	 * @return string value of profileEmail
 	 **/
-	public function getProductPrice(): float {
-		return ($this->productPrice);
+	public function getProfileEmail(): string {
+		return ($this->profileEmail);
 	}
 	/**
-	 * mutator method for productPrice
+	 * mutator method for profileEmail
 	 *
-	 * @param float $newProductPrice new value of productPrice
-	 * @throws \RangeException if $newProductPrice is not positive
-	 * @throws \TypeError if $newProductPrice is not an integer
+	 * @param string $newProfileEmail new value of profileEmail
+	 * @throws \InvalidArgumentException if $newProfileEmail is not a string or insecure
+	 * @throws \TypeError if $newProfileEmail is not a string
 	 **/
-	public function setProductPrice(float $newProductPrice): void {
-		// verify the productPrice is positive
-		if($newProductPrice <= 0) {
-			throw(new \RangeException("product price is not positive"));
+	public function setProfileEmail(string $newProfileEmail): void {
+		// verify the profileEmail is secure
+		$newProfileEmail = trim($newProfileEmail);
+		$newProfileEmail = filter_var($newProfileEmail, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+		if(empty($newProfileEmail) === true) {
+			throw(new \InvalidArgumentException("profile email is empty or insecure"));
 		}
-		// convert and store the productProfileId
-		$this->productPrice = $newProductPrice;
+		// verify the profileEmailwill fit in the database
+		if(strlen($newProfileEmail) > 128) {
+			throw(new \RangeException("profile email content too large"));
+		}
+		// store the profileEmail
+		$this->profileEmail = $newProfileEmail;
 	}
-
+	/**
+	 * accessor method for profileHash
+	 *
+	 * @return string value of profileHash
+	 **/
+	public function getProfileHash(): string {
+		return ($this->profileHash);
+	}
+	/**
+	 * mutator method for profileHash
+	 *
+	 * @param string $newProfileHash new value of profileHash
+	 * @throws \InvalidArgumentException if $newProfileHash is not a string or insecure
+	 * @throws \TypeError if $newProfileHash is not a string
+	 **/
+	public function setProfileHash(string $newProfileHash): void {
+		// verify the profileHash is secure
+		$newProfileHash = trim($newProfileHash);
+		$newProfileHash = filter_var($newProfileHash, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+		if(empty($newProfileHash) === true) {
+			throw(new \InvalidArgumentException("profile hash is empty or insecure"));
+		}
+		// verify the profileHash will fit in the database
+		if(strlen($newProfileHash) > 128) {
+			throw(new \RangeException("profile hash content too large"));
+		}
+		// store the profileHash
+		$this->profileHash = $newProfileHash;
+	}
+/**
+ * accessor method for profilePhone
+ *
+ * @return string value of profilePhone
+ **/
+public function getProfilePhone(): string {
+	return ($this->profilePhone);
+	}
+/**
+ * mutator method for profilePhone
+ *
+ * @param string $newProfilePhone new value of profilePhone
+ * @throws \InvalidArgumentException if $newProfilePhone is not a string or insecure
+ * @throws \TypeError if $newProfilePhone is not a string
+ **/
+public function setProfilePhone(string$newProfilePhone): void {
+	// verify the profilePhone is secure
+	$newProfilePhone = trim($newProfilePhone);
+	$newProfilePhone = filter_var($newProfilePhone, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+	if(empty($newProfilePhone) === true) {
+		throw(new \InvalidArgumentException("profile phone is empty or insecure"));
+	}
+	// verify the profilePhone will fit in the database
+	if(strlen($newProfilePhone) > 32) {
+		throw(new \RangeException("profile phone content too large"));
+	}
+	// store the profilePhone
+	$this->profilePhone = $newProfilePhone;
+	}
+	/**
+	 * accessor method for profileSalt
+	 *
+	 * @return string value of profileSalt
+	 **/
+	public function getProfileSalt(): string {
+		return ($this->profileSalt);
+	}
+	/**
+	 * mutator method for profileSalt
+	 *
+	 * @param string $newProfileSalt new value of profileSalt
+	 * @throws \InvalidArgumentException if $newProfileSalt is not a string or insecure
+	 * @throws \TypeError if $newProfileSaltis not a string
+	 **/
+	public function setProfileSalt(string$newProfileSalt): void {
+		// verify the profileSalt is secure
+		$newProfileSalt = trim($newProfileSalt);
+		$newProfileSalt = filter_var($newProfileSalt, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+		if(empty($newProfileSalt) === true) {
+			throw(new \InvalidArgumentException("profile phone is empty or insecure"));
+		}
+		// verify the profileSalt will fit in the database
+		if(strlen($newProfileSalt) > 64) {
+			throw(new \RangeException("profile phone content too large"));
+		}
+		// store the profileSalt
+		$this->profileSalt = $newProfileSalt;
+	}
 }
