@@ -215,4 +215,40 @@ class product {
 		$parameters = ["productUserId" => $this->productUserId, "productDescription" => $this->productDescription, "productPrice" => $this->productPrice];
 		$statement->execute($parameters);
 	}
+	/**
+	 * gets the Product by productId
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @param int $productId product id to search for
+	 * @return Product|null Product found or null if not found
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError when variables are not the correct data type
+	 **/
+	public static function getProductByProductId(\PDO $pdo, int $productId) : ?Product {
+		// sanitize the productId before searching
+		if($productId <= 0) {
+			throw(new \PDOException("product id is not positive"));
+		}
+		// create query template
+		$query = "SELECT productId, productUserId, productDescription, productPrice FROM product WHERE productId = :productId";
+		$statement = $pdo->prepare($query);
+
+		// bind the product id to the place holder in the template
+		$parameters = ["productId" => $productId];
+		$statement->execute($parameters);
+
+		// grab the product from mySQL
+		try {
+			$product= null;
+			$statement->setFetchMode(\PDO::FETCH_ASSOC);
+			$row = $statement->fetch();
+			if($row !== false) {
+				$product = new Product($row["productId"], $row["productUserId"], $row["productDescription"], $row["productPrice"]);
+			}
+		} catch(\Exception $exception) {
+			// if the row couldn't be converted, rethrow it
+			throw(new \PDOException($exception->getMessage(), 0, $exception));
+		}
+		return($product);
+	}
 }

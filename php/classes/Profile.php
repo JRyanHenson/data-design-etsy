@@ -339,4 +339,41 @@ public function setProfilePhone(string$newProfilePhone): void {
 		$parameters = ["profileActivationToken" => $this->profileActivationToken, "profileAtHandle" => $this->profileAtHandle, "profileEmail" => $this->profileEmail, "profileHash" => $this->profileHash, "profilePhone" => $this->profilePhone, "profileSalt" => $this->profileSalt];
 		$statement->execute($parameters);
 	}
+	/**
+	 * gets the Profile by profileId
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @param int $profileId profile id to search for
+	 * @return Profile|null Profile found or null if not found
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError when variables are not the correct data type
+	 **/
+	public static function getProfileByProfileId(\PDO $pdo, int $profileId) : ?Profile {
+		// sanitize the profileId before searching
+		if($profileId <= 0) {
+			throw(new \PDOException("profile id is not positive"));
+		}
+
+		// create query template
+		$query = "SELECT profileId, profileAtHandle, profileEmail, profileHash, profilePhone FROM profile WHERE profileId = :profileId";
+		$statement = $pdo->prepare($query);
+
+		// bind the profile id to the place holder in the template
+		$parameters = ["profileId" => $profileId];
+		$statement->execute($parameters);
+
+		// grab the profile from mySQL
+		try {
+			$profile = null;
+			$statement->setFetchMode(\PDO::FETCH_ASSOC);
+			$row = $statement->fetch();
+			if($row !== false) {
+				$profile = new Profile($row["profileId"], $row["profileActivationToken"], $row["profileAtHandle"], $row["profileEmail"], $row["profileHash"], $row["profilePhone"], $row["profileSalt"]);
+			}
+		} catch(\Exception $exception) {
+			// if the row couldn't be converted, rethrow it
+			throw(new \PDOException($exception->getMessage(), 0, $exception));
+		}
+		return($profile);
+	}
 }

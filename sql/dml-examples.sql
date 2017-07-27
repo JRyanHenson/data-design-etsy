@@ -18,7 +18,7 @@
 	VALUES(3,"board game", 40.00);
 
 -- Update: change a row
-	UPDATE profile SET profileAtHandle = "@marbleryebread" WHERE profileId = 1;
+	UPDATE profile SET profileAtHandle = "@marbleryebread2" WHERE profileId = 1;
 
 -- Where Clause
 -- numerics
